@@ -1,0 +1,52 @@
+:root { --red: #ff314c; --blue: #35d9ff; --ink: #080b12; --muted: #728098; }
+* { box-sizing: border-box; }
+body { position: relative; margin: 0; min-height: 100vh; display: grid; place-items: center; overflow: hidden; color: #eaf5ff; background: #05070c; font-family: "Trebuchet MS", sans-serif; }
+body::before { content: ""; position: fixed; z-index: -2; inset: 0; opacity: .2; background: linear-gradient(115deg, rgba(255,49,76,.32), transparent 38%), linear-gradient(295deg, rgba(53,217,255,.25), transparent 42%), url("Spidy alarm.jpg") 50% 50% / cover; filter: saturate(1.25) contrast(1.1); }
+.scene { position: relative; width: min(920px, 94vw); }
+.scene::before, .scene::after { content: ""; position: absolute; z-index: -1; width: 35vw; height: 35vw; max-width: 400px; max-height: 400px; border: 1px solid rgba(53,217,255,.22); transform: rotate(45deg); }
+.scene::before { left: -14%; top: 12%; box-shadow: 0 0 70px rgba(53,217,255,.18); }
+.scene::after { right: -14%; bottom: 8%; border-color: rgba(255,49,76,.3); box-shadow: 0 0 70px rgba(255,49,76,.14); }
+.scanlines { position: fixed; inset: 0; pointer-events: none; opacity: .12; background: repeating-linear-gradient(0deg, transparent 0 3px, #fff 4px); }
+
+.alarm-clock { position: relative; min-height: 500px; padding: 28px 34px 24px; background: linear-gradient(140deg, rgba(25,31,45,.97), rgba(5,9,17,.98)); border: 1px solid #34415a; border-radius: 18px; box-shadow: 0 0 0 6px rgba(8,12,20,.8), 0 28px 90px #000, inset 0 0 40px rgba(53,217,255,.06); }
+.alarm-clock::before { content: ""; position: absolute; inset: 10px; pointer-events: none; border: 1px solid rgba(255,49,76,.22); border-radius: 11px; }
+.clock-header, .display-footer, .clock-foot { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+.clock-header { position: relative; margin-bottom: 22px; font-size: 11px; letter-spacing: 3px; font-weight: bold; }
+.brand-mark b { color: var(--red); }
+.status { display: flex; align-items: center; gap: 9px; color: var(--blue); }
+#statusLight { width: 8px; height: 8px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 14px var(--blue); }
+.armed #statusLight { background: var(--red); box-shadow: 0 0 14px var(--red); }
+.ringing #statusLight { animation: pulse .45s infinite alternate; }
+
+.display-frame { position: relative; padding: 18px 24px 15px; background: #070e18; border: 1px solid #1b7697; box-shadow: inset 0 0 30px rgba(53,217,255,.1), 0 0 20px rgba(53,217,255,.08); }
+.display-label, .display-footer, .clock-foot, .control-deck label { font-size: 10px; letter-spacing: 2px; font-weight: bold; color: var(--muted); }
+.display-label { display: flex; justify-content: space-between; gap: 12px; }
+.time { padding: 20px 0 14px; color: var(--blue); font: 700 clamp(54px, 12vw, 112px)/1 "Courier New", monospace; letter-spacing: 4px; text-align: center; text-shadow: 0 0 16px rgba(53,217,255,.8); }
+.display-footer { color: #a5b3c8; font-size: 9px; }
+.control-deck { padding: 24px 0 20px; }
+.control-deck label { display: block; margin-bottom: 8px; color: var(--red); }
+.input-row { display: flex; gap: 10px; }
+input, button { font: inherit; }
+input { min-width: 0; flex: 1; padding: 13px 15px; color: var(--blue); background: #0b111c; border: 1px solid #33435b; outline: none; letter-spacing: 3px; }
+input:focus { border-color: var(--blue); box-shadow: 0 0 14px rgba(53,217,255,.2); }
+button { border: 1px solid transparent; padding: 0 18px; color: #061018; background: var(--blue); font-size: 10px; font-weight: bold; letter-spacing: 1.5px; cursor: pointer; transition: .2s ease; }
+button:hover, button:focus-visible { transform: translateY(-2px); filter: brightness(1.15); box-shadow: 0 7px 20px rgba(53,217,255,.22); }
+.actions { display: flex; gap: 10px; margin-top: 12px; }
+.ghost-button { padding: 11px 14px; color: var(--blue); background: transparent; border-color: #28536b; flex: 1; }
+.danger-button { color: var(--red); border-color: #71303b; }
+.clock-foot { padding-top: 13px; border-top: 1px solid #202b3c; font-size: 8px; }
+.clock-foot span:first-child { color: var(--red); }
+.alarm-clock.destroyed { animation: destroy .8s ease-in both; }
+.explosion { position: fixed; inset: 0; display: none; place-items: center; pointer-events: none; }
+.explosion.active { display: grid; }
+.flash { position: absolute; inset: 0; background: rgba(255,49,76,.65); animation: flash .7s ease-out forwards; }
+.shockwave { width: 20vmin; aspect-ratio: 1; border: 8px solid var(--blue); border-radius: 50%; animation: shock 1s ease-out forwards; }
+.fireball { position: absolute; width: 18vmin; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, #fff 0 10%, var(--red) 35%, transparent 70%); animation: shock .7s ease-out reverse; }
+.detonation-copy { position: absolute; color: white; text-align: center; font-size: 20px; letter-spacing: 4px; text-shadow: 0 0 15px var(--red); animation: rise 1s ease-out forwards; }
+.detonation-copy strong { color: var(--red); font-size: 34px; }
+@keyframes pulse { to { opacity: .2; transform: scale(1.8); } }
+@keyframes flash { to { opacity: 0; } }
+@keyframes shock { to { transform: scale(10); opacity: 0; } }
+@keyframes rise { to { transform: translateY(-20px); opacity: 0; } }
+@keyframes destroy { 20% { filter: brightness(5); } 100% { opacity: 0; transform: scale(.72) rotate(5deg); filter: blur(8px); } }
+@media (max-width: 560px) { .alarm-clock { min-height: 0; padding: 22px 18px 18px; } .input-row, .actions { flex-direction: column; } button { min-height: 44px; } .display-footer, .clock-foot { align-items: flex-start; flex-direction: column; gap: 6px; } }

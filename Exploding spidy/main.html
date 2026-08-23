@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrono-X Alarm Clock</title>
+    <link rel="stylesheet" href="edits.css">
+</head>
+<body>
+    <main class="scene">
+        <div class="scanlines" aria-hidden="true"></div>
+        <section class="alarm-clock" id="alarmClock" aria-label="Chrono-X alarm clock">
+            <div class="clock-header">
+                <span class="brand-mark">CX <b>//</b> 07</span>
+                <span class="status"><i id="statusLight"></i><span id="statusText">STANDBY</span></span>
+            </div>
+            <div class="display-frame">
+                <div class="display-label">LOCAL TIME <span id="date">-- --- ----</span></div>
+                <div class="time" id="time">00:00:00</div>
+                <div class="display-footer"><span>SECURE CHRONOMETRY</span><span id="countdown">NO ALARM SET</span></div>
+            </div>
+            <div class="control-deck">
+                <label for="alarmInput">DETONATION TIME</label>
+                <div class="input-row">
+                    <input type="text" id="alarmInput" maxlength="5" placeholder="HH:MM" aria-label="Set alarm time">
+                    <button type="button" class="primary-button" id="setAlarm">ARM DEVICE</button>
+                </div>
+                <div class="actions">
+                    <button type="button" class="ghost-button" id="testAlarm">TEST DETONATION</button>
+                    <button type="button" class="ghost-button danger-button" id="stopAlarm">DISARM / RESET</button>
+                </div>
+            </div>
+            <div class="clock-foot"><span>WARNING: DESTRUCTIVE WAKE PROTOCOL</span><span>V 3.7.1</span></div>
+        </section>
+        <div class="explosion" id="explosion" aria-hidden="true">
+            <div class="flash"></div><div class="shockwave"></div><div class="fireball"></div>
+            <div class="debris debris-one"></div><div class="debris debris-two"></div><div class="debris debris-three"></div>
+            <div class="detonation-copy">SYSTEM<br><strong>BREACH</strong></div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
